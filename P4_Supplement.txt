@@ -1,7 +1,7 @@
 # P4_Supplement
 # Add your answer to  QS3.1 [optional] and QS7.1 [mandatory] using 
 
-QS3.1 [option]:
+QS3.1 [option]: For a general elimination operation, the unconditioned variables in the returned factor are usually the variables that remain after elimination. The conditioned variables are the ones that are eliminated during the operation.
 
 
 
