@@ -102,7 +102,30 @@ def joinFactors(factors: List[Factor]):
 
 
     "*** YOUR CODE HERE ***"
-    raiseNotDefined()
+    uncondVars = set()
+    condVars = set()
+    for factor in factors:
+        uncondVars |= set(factor.unconditionedVariables())
+        condVars |= set(factor.conditionedVariables())
+        
+    for uncondVar in uncondVars:
+        if uncondVar in condVars:
+            condVars.remove(uncondVar)
+
+    # Create a new factor with the combined variables
+    newFactor = Factor(list(uncondVars), list(condVars), factor.variableDomainsDict())
+
+    # Iterate over all possible assignments
+    for assignment in newFactor.getAllPossibleAssignmentDicts():
+        # Calculate the product of probabilities
+        product = 1.0
+        for factor in factors:
+            product *= factor.getProbability(assignment)
+        
+        # Set the probability in the new factor
+        newFactor.setProbability(assignment, product)
+
+    return newFactor
     "*** END YOUR CODE HERE ***"
 
 ########### ########### ###########
