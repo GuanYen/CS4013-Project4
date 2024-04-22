@@ -5,4 +5,5 @@ QS3.1 [option]:
 
 
 
-QS7.1: 
+QS7.1: I noticed square's shadding are different in test 3, which is based on the probability of the ghost's 
+presence at the location. Darker the square, higher the possibility.
