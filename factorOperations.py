@@ -176,7 +176,20 @@ def eliminateWithCallTracking(callTrackingList=None):
                     "unconditionedVariables: " + str(factor.unconditionedVariables()))
 
         "*** YOUR CODE HERE ***"
-        raiseNotDefined()
+        reducedUncondVars = factor.unconditionedVariables()
+        reducedUncondVars.remove(eliminationVariable)
+        reducedFactor = Factor(reducedUncondVars, factor.conditionedVariables(), factor.variableDomainsDict())
+
+        for reducedAssignment in reducedFactor.getAllPossibleAssignmentDicts():
+            prob = 0
+            for elimVarVal in factor.variableDomainsDict()[eliminationVariable]:
+                fullAssignment = reducedAssignment
+                fullAssignment[eliminationVariable] = elimVarVal
+
+                prob = prob + factor.getProbability(fullAssignment)
+            reducedFactor.setProbability(reducedAssignment, prob)
+
+        return reducedFactor
         "*** END YOUR CODE HERE ***"
 
     return eliminate
